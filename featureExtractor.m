@@ -4,7 +4,7 @@
 datasets = {"exampleEMGdata180_120_Train_Test.mat"};
 
 % Features to extract, implemented in extractFeatures(_,_,_) function
-includedFeatures = {'variance','waveformlength', 'meanabsvalue', 'rootmeansquared', 'wilsonamp', 'improved1meanabsvalue'}; 
+includedFeatures = {'variance','waveformlength', 'meanabsvalue', 'rootmeansquared', 'wilsonamp', 'improved1meanabsvalue', 'meanpower'}; 
 
 % Save the extracted features to the features folderx`
 for dataset = 1 : length(datasets)
@@ -96,10 +96,17 @@ function [feature_table] = extractFeatures(dataChTimeTr,includedFeatures, Fs)
                 slice3 = sum(abs(dataChTimeTr(:, (series_length * 0.75): series_length, :)), 2);
                 weighted_slices = (slice1 * 0.25) + slice2 + (slice3 * 0.25);
                 fvalues = squeeze(weighted_slices ./ series_length)';
-           
-                
-
-               
+            
+            % Mean power (https://link.springer.com/article/10.1007/s00779-019-01285-2)
+            % MNP represents the average power of the EMG signal power
+            % spectrum. 
+            case 'meanpower'
+                fvalues = zeros(size(dataChTimeTr, 3), size(dataChTimeTr, 1));
+                for i = 1 : size(fvalues, 1)
+                    for j = 1: size(fvalues, 2)
+                        fvalues(i,j) = bandpower(dataChTimeTr(j,:,i));
+                    end
+                end
 
 
             otherwise
