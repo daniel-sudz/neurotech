@@ -4,9 +4,9 @@
 datasets = {"exampleEMGdata180_120_Train_Test.mat"};
 
 % Features to extract, implemented in extractFeatures(_,_,_) function
-includedFeatures = {'var','somethingnotincluded'}; 
+includedFeatures = {'variance','waveformlength', 'meanabsvalue', 'rootmeansquared', 'wilsonamp', 'improved1meanabsvalue'}; 
 
-% Save the extracted features to the features folder
+% Save the extracted features to the features folderx`
 for dataset = 1 : length(datasets)
     dataset_name = datasets{dataset};
 
@@ -52,12 +52,54 @@ function [feature_table] = extractFeatures(dataChTimeTr,includedFeatures, Fs)
             % signal from the mean. In this case, the signal is all of the
             % timepoints for a single channel and trial.
             %(fvalues = trials x channels)
-            case 'var'
+            case 'variance'
                 fvalues = squeeze(var(dataChTimeTr,0,2))';
-             
-            % Write your own options here by using case 'option name'
-            % 'myawesomefeature'
-                % my awesome feature code that outputs fvalues
+            
+            % Waveform length (https://link.springer.com/article/10.1007/s00779-019-01285-2)
+            % waveform length represents the sum of amplitude changes
+            % between adjacent data to represent the degree of change in
+            % the amplitude of the signal. 
+            % (fvalues = trials x channgels)
+            case 'waveformlength'
+                fvalues = squeeze(sum(abs(diff(dataChTimeTr, 1, 2)), 2))';
+            
+            % Mean absolute value (https://link.springer.com/article/10.1007/s00779-019-01285-2)
+            % the MAV is the mean of the absolute value of the EMG signal
+            % amplitude.
+            case 'meanabsvalue'
+                fvalues = squeeze(sum(abs(dataChTimeTr), 2) ./ size(dataChTimeTr, 3))';
+            
+            % Root mean squared (https://link.springer.com/article/10.1007/s00779-019-01285-2)
+            % The RMS can be used to measure the power of an EMG signal
+            % which would correlate to the amount of muscle activation. 
+            % RMS is calculated by taking the square root of the average
+            % squared value of the input data
+            case 'rootmeansquared'
+                fvalues = squeeze(sqrt(sum((dataChTimeTr .^ 2), 2) ./ size(dataChTimeTr, 3)))';
+            
+            % Wilson amplitude (https://link.springer.com/article/10.1007/s00779-019-01285-2)
+            % The WAMP is a measure of the amount of times the difference
+            % in signal amplitude exceedes a given threshold. We use a
+            % threshold of 5e3.
+            case 'wilsonamp'
+                wilson_threshold = 5e3;
+                fvalues = squeeze(sum(abs(diff(dataChTimeTr, 1, 2)) > wilson_threshold, 2))';
+            
+            % Improved Mean Absolute Value 1 (https://link.springer.com/article/10.1007/s00779-019-01285-2)
+            % The MAV1 provides a higher weighting to the more central
+            % points in the observed window which can improve the
+            % robustness of the MAV feature. 
+            case 'improved1meanabsvalue'
+                series_length = size(dataChTimeTr, 3);
+                slice1 = sum(abs(dataChTimeTr(:, 1:(series_length * 0.25), :)), 2);
+                slice2 = sum(abs(dataChTimeTr(:, (series_length * 0.25):(series_length * 0.75), :)), 2);
+                slice3 = sum(abs(dataChTimeTr(:, (series_length * 0.75): series_length, :)), 2);
+                weighted_slices = (slice1 * 0.25) + slice2 + (slice3 * 0.25);
+                fvalues = squeeze(weighted_slices ./ series_length)';
+           
+                
+
+               
 
 
             otherwise
