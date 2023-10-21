@@ -1,6 +1,5 @@
-# neurotech
-
-# Util Code 
+# EEG, Rock, Paper, Scissors Classification
+https://github.com/daniel-sudz/neurotech
 
 
 # Extracted Feature Histograms of Training Data by Label
