@@ -16,7 +16,7 @@ Mean absolute value (https://link.springer.com/article/10.1007/s00779-019-01285-
   <img src="https://github.com/daniel-sudz/neurotech/blob/main/plots/features/training-Improved-Mean-Abs-Value-1.png?raw=true" width="500"/>  
 </p>
 
-Improved Mean Absolute Value 1 (https://link.springer.com/article/10.1007/s00779-019-01285-2). The MAV1 provides a higher weighting to the more central points in the observed window which can improve the robustness of the MAV feature.
+Improved Mean Absolute Value 1 (https://link.springer.com/article/10.1007/s00779-019-01285-2). The MAV1 provides a higher weighting to the more central points in the observed window which can improve the robustness of the MAV feature. (fvalues = trials x channgels)
 
 ### Wave Form Length
 
