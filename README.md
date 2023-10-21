@@ -49,7 +49,17 @@
 # Final Metrics For Two Features (Wave Form Length + Root Mean Squared)
 
 <p align="center">
-  <img src="https://github.com/daniel-sudz/neurotech/blob/main/plots/final_metrics.png?raw=true)https://github.com/daniel-sudz/neurotech/blob/main/plots/final_metrics.png?raw=true" width="500"/>  
+  <img src="https://github.com/daniel-sudz/neurotech/blob/main/plots/final_metrics.png?raw=true" width="500"/>  
 </p>
 
+# Confusion Chart Training Cross Validation
 
+<p align="center">
+  <img src="https://github.com/daniel-sudz/neurotech/blob/main/plots/training-cross-validation-confusion-chart.png?raw=true" width="500"/>  
+</p>
+
+# Confusion Chart Testing Data
+
+<p align="center">
+  <img src="https://github.com/daniel-sudz/neurotech/blob/main/plots/test-confusion-chart.png?raw=truee" width="500"/>  
+</p>
