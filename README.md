@@ -1,5 +1,8 @@
 # neurotech
 
+# Util Code 
+
+
 # Extracted Feature Histograms of Training Data by Label
 
 ### Mean Absolute Value
@@ -36,3 +39,11 @@
 <p align="center">
   <img src="./plots/features/training-Wilson-Apmlitude.png" width="500"/>  
 </p>
+
+# Final Metrics For (Wave Form Length + Root Mean Squared)
+
+<p align="center">
+  <img src="./plots/final_metrics.png" width="500"/>  
+</p>
+
+
