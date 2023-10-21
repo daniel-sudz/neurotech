@@ -66,9 +66,36 @@ uit.Position = [0 0 500 76];
 exportapp(fig, strcat("plots/final_metrics.png"))
 close(findall(0, 'type', 'figure'));
 
+% create confusion matrix for test data
+cm = confusionchart(label_matrix_to_string_matrix(test_Y), label_matrix_to_string_matrix(test_Y_predict));
+cm.Title = 'Two Feature Test Confusion Matrix';
+fontsize(gcf, 12, "points")
+exportgraphics(gcf, strcat("plots/test-confusion-chart.png"),'Resolution',300)
+close all;
+
+% create confusion matrix for cross validation
+cm = confusionchart(label_matrix_to_string_matrix(train_Y), label_matrix_to_string_matrix(cross_Y_predict));
+cm.Title = 'Two Feature Training Cross Validation Confusion Matrix';
+fontsize(gcf, 12, "points")
+exportgraphics(gcf, strcat("plots/training-cross-validation-confusion-chart.png"),'Resolution',300)
+close all;
+
 
 function [accuracy] = get_accuracy_for_feature_list(dataset, feature_list)
     [train_X, train_Y] = loadFeaturesToXY(strcat("features/train/",dataset), feature_list);
     Y_predict = trainCrossValidate(train_X, train_Y, 5);
     [accuracy, ~, ~, ~] = calculateMetrics(Y_predict, train_Y);
+end
+
+function [string_labels] = label_matrix_to_string_matrix(labels)
+     rock = repmat({'Rock'}, length(labels), 1);
+     paper = repmat({'Paper'}, length(labels), 1);
+     scissors = repmat({'Scissors'}, length(labels), 1);
+     
+     string_labels = repmat({''}, length(labels), 1);
+     string_labels(labels==1) = {'Rock'};
+     string_labels(labels==2) = {'Paper'};
+     string_labels(labels==3) = {'Scissors'};
+
+    
 end
