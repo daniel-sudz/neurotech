@@ -1,7 +1,7 @@
 
 
 % Respective files should be placed in the train/test folder with same name
-datasets = {"exampleEMGdata180_120_Train_Test.mat"};
+datasets = {"anotherDay.mat"};
 
 % Features to extract, implemented in extractFeatures(_,_,_) function
 includedFeatures = {'variance','waveformlength', 'meanabsvalue', 'rootmeansquared', 'wilsonamp', 'improved1meanabsvalue', 'meanpower'}; 

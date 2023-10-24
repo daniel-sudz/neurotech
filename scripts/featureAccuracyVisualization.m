@@ -1,5 +1,5 @@
 
-dataset = "exampleEMGdata180_120_Train_Test.mat";
+dataset = "anotherDay.mat";
 
 % calculate cross-validation accuracy for each feature
 wave_form_acc = get_accuracy_for_feature_list(dataset, {'waveformlength_'});
