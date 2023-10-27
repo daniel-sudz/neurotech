@@ -1,7 +1,7 @@
 
 
 % Respective files should be placed in the train/test folder with same name
-datasets = {"anotherDay.mat"};
+datasets = {"raw_combined.mat"};
 
 % Features to extract, implemented in extractFeatures(_,_,_) function
 includedFeatures = {'variance','waveformlength', 'meanabsvalue', 'rootmeansquared', 'wilsonamp', 'improved1meanabsvalue', 'meanpower'}; 
@@ -91,9 +91,9 @@ function [feature_table] = extractFeatures(dataChTimeTr,includedFeatures, Fs)
             % robustness of the MAV feature. 
             case 'improved1meanabsvalue'
                 series_length = size(dataChTimeTr, 3);
-                slice1 = sum(abs(dataChTimeTr(:, 1:(series_length * 0.25), :)), 2);
-                slice2 = sum(abs(dataChTimeTr(:, (series_length * 0.25):(series_length * 0.75), :)), 2);
-                slice3 = sum(abs(dataChTimeTr(:, (series_length * 0.75): series_length, :)), 2);
+                slice1 = sum(abs(dataChTimeTr(:, 1:int64(series_length * 0.25), :)), 2);
+                slice2 = sum(abs(dataChTimeTr(:, int64(series_length * 0.25):int64(series_length * 0.75), :)), 2);
+                slice3 = sum(abs(dataChTimeTr(:, int64(series_length * 0.75): series_length, :)), 2);
                 weighted_slices = (slice1 * 0.25) + slice2 + (slice3 * 0.25);
                 fvalues = squeeze(weighted_slices ./ series_length)';
             

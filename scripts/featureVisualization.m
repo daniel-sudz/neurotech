@@ -1,6 +1,6 @@
 
-original_dataset = "datasets/train/anotherDay.mat";
-features = "features/train/anotherDay.mat";
+original_dataset = "datasets/train/raw_combined.mat";
+features = "features/train/raw_combined.mat";
 
 load(original_dataset);
 load(features);

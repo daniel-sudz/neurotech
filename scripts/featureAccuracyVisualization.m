@@ -1,5 +1,5 @@
 
-dataset = "anotherDay.mat";
+dataset = "raw_combined.mat";
 
 % calculate cross-validation accuracy for each feature
 wave_form_acc = get_accuracy_for_feature_list(dataset, {'waveformlength_'});
