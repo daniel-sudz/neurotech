@@ -1,6 +1,6 @@
 
-original_dataset = "datasets/train/raw_combined.mat";
-features = "features/train/raw_combined.mat";
+original_dataset = strcat("datasets/train/", getenv("DATASET"));
+features = strcat("features/train/", getenv("DATASET"));
 
 load(original_dataset);
 load(features);
@@ -21,7 +21,7 @@ function [] = plot_features(feature_arr, labels, feature_name)
     figure(); hold on;
     title(strcat(feature_name, " of Channel 1 Training Data by Label"));
     for cond=1:3
-        histogram(feature_arr(labels==cond), 'BinEdges', min(feature_arr):max(feature_arr)/30:max(feature_arr))
+        histogram(feature_arr(labels==cond), 'BinEdges', min(feature_arr):max(feature_arr)/100:max(feature_arr))
     end
     xlabel(feature_name)
     ylabel("Frequency")

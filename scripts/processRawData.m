@@ -5,7 +5,7 @@
 %} 
 
 % output dataset name
-output_dataset = "raw_combined.mat";
+output_dataset = getenv("DATASET");
 
 % files to process
 raw_file_list = dir(fullfile('datasets/raw', '/**/*.mat'));
