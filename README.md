@@ -1,6 +1,11 @@
 # EEG: Rock, Paper, Scissors Classification
 https://github.com/daniel-sudz/neurotech
 
+# Runing live 
+```bash
+DATASET="raw_combined.mat" ./scripts/live/testData
+```
+
 # Extracted Feature Histograms of Training Data by Label
 
 ### Mean Absolute Value
