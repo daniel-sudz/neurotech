@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z ${DATASET+x} ]; then echo "DATASET is unset" && exit; else echo "DATASET is set to '$DATASET'"; fi
+
+
+# change directory to root of repo regardless of where file has been executed from
+# https://stackoverflow.com/questions/3349105/how-can-i-set-the-current-working-directory-to-the-directory-of-the-script-in-ba
+cd "$(dirname "${BASH_SOURCE[0]}")"
+cd ../..
+
+pip3 install pynput matlabengine
+python3 "Neurotech2023/Neurotech_Pison_Pipeline/dataCollection/testData.py" --matlabmodel "models/$DATASET"
