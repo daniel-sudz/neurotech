@@ -16,8 +16,7 @@ function res = runMatlabModel(data)
     % filtereddata=preprocessData(data)';
     disp("filtered data size: "+size(filtereddata))
     disp("extracting features")
-    includedFeatures = {'rms','wl'}; 
-    featuretable = extractFeatures(filtereddata, includedFeatures, 1000, categorical("rock"));
+    featuretable = extractFeatures(filtereddata, bestTwoFeatures(), 1000);
     disp("feature columns: "+featuretable.Properties.VariableNames)
     disp("loading classifier")
     load("classifier.mat","currentClassifier");
