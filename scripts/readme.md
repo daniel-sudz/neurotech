@@ -14,6 +14,9 @@ Combines data under ```datasets/raw/**``` and saves a test/train split into ```d
 ### ```featureExtractor.m```
 Extracts features and saves them under ```features/train``` and ```features/test```.
 
+### ```saveModel.m```
+Saves a final model based on trianing data and features described in ```util/bestTwoFeatures.m```
+
 ### ```featureVisualizer.m```
 Creates histogram disbtributions for features and saves plots under ```plots/features```
 
