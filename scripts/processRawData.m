@@ -21,6 +21,7 @@ combined_preprocessed_labels = [];
 for file = 1 : length(raw_file_list)
     % preprocess data
     file_path = fullfile(raw_file_list(file).folder, raw_file_list(file).name);
+    disp(file_path);
     load(file_path);
     [epoched_data, gesture_list] = preprocessData(lsl_data, marker_data);
 

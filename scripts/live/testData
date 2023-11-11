@@ -9,7 +9,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 cd ../..
 
 # add matlab paths
-export MATLABPATH="$PWD/Neurotech2023/Neurotech_Pison_Pipeline/dataCollection"
+export MATLABPATH="$PWD/util:$PWD/Neurotech2023/Neurotech_Pison_Pipeline/dataCollection"
 
 pip3 install pynput matlabengine
 python3 "Neurotech2023/Neurotech_Pison_Pipeline/dataCollection/testData.py" --matlabmodel "models/$DATASET"

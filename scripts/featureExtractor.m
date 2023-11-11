@@ -12,7 +12,7 @@ for dataset = 1 : length(datasets)
 
     % save the train features
     load(strcat("datasets/train/", dataset_name));
-    feature_table = extractFeatures(ChTimeTr,includedFeatures,Fs);
+    feature_table = extractFeatures(dataChTimeTr,includedFeatures,Fs);
     save(strcat("features/train/", dataset_name), "feature_table","labels");
 
     % save the test features

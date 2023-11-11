@@ -1,30 +1,31 @@
+%%%
+% This is starter code for where you should add your MATLAB model.
+% You can place this wherever you want, but keep the function name
+% This function should take in a bunch of data from the EMG sensor
+% and return rock, paper, and scissors, based on what your model
+% predicts. 
+%%%
 function res = runMatlabModel(data)
-    %%%
-    % This is starter code for where you should add your MATLAB model.
-    % You can place this wherever you want, but keep the function name
-    % This function should take in a bunch of data from the EMG sensor
-    % and return rock, paper, and scissors, based on what your model
-    % predicts. 
-    %%%
-    % disp(data)
+    % preprocess the data
     disp("running model")
     disp("preprocessing data")
     disp("data size: "+size(data))
-    % save("ooga.mat","data")
     filtereddata=preprocessData(data(end-1399:end,:))';
-    % filtereddata=preprocessData(data(1:1400,:))';
-    % filtereddata=preprocessData(data)';
     disp("filtered data size: "+size(filtereddata))
+    
+    % extract the features
     disp("extracting features")
+    disp(bestTwoFeatures())
     featuretable = extractFeatures(filtereddata, bestTwoFeatures(), 1000);
-    disp("feature columns: "+featuretable.Properties.VariableNames)
+    
+    % load the classifier
     disp("loading classifier")
-    load("classifier.mat","currentClassifier");
+    load(strcat("models/", getenv("DATASET")), "model");
+    
+    % run the prediction and output results
     disp("running classifier")
-    res = currentClassifier.predict(featuretable);
+    res = model.predict(featuretable);
     labels={"rock","paper","scissors"};
     disp("prediction: "+labels(res))
     disp(res)
-    %Pison SALUS - 55A07984 ADC
-    %Pison SALUS - 55A0E730 ADC
 end
