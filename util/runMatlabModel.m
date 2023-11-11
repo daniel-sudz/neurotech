@@ -16,15 +16,17 @@ function res = runMatlabModel(data)
     % extract the features
     disp("extracting features")
     disp(bestTwoFeatures())
-    featuretable = extractFeatures(filtereddata, bestTwoFeatures(), 1000);
-    
+    feature_table = extractFeatures(filtereddata, bestTwoFeatures(), 1000);
+    selected_features = feature_table(:, contains(feature_table.Properties.VariableNames, bestTwoFeatures()));
+    disp(selected_features);
+
     % load the classifier
     disp("loading classifier")
     load(strcat("models/", getenv("DATASET")), "model");
     
     % run the prediction and output results
     disp("running classifier")
-    res = model.predict(featuretable);
+    res = model.predict(selected_features);
     labels={"rock","paper","scissors"};
     disp("prediction: "+labels(res))
     disp(res)
